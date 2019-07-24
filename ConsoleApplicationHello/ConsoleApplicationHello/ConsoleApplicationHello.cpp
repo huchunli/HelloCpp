@@ -7,7 +7,16 @@
 int main()
 {
     std::cout << "Hello World!\n"; 
-	std::cout << "This is git start.\n";
+
+	FILE* pf = NULL;
+	errno_t stuta = fopen_s(&pf, "hello.dat", "wb");
+	if (stuta != 0) {
+		std::cout << "write hello.dat failed.\r\n";
+		return 0;
+	}
+	std::string content = "this is what i want to say.";
+	fwrite(content.c_str(), content.length(), 1, pf);
+	fclose(pf);
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
